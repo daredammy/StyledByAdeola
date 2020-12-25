@@ -1,0 +1,30 @@
+<h2 class="text-center m-1">Order Summary</h2>
+
+<div class="checkoutForm">
+  <table class="table m-0 table-borderless carttable">
+    <tr><th>First Name</th><td>{{orderService.order.firstName}}</td></tr>
+    <tr><th>Last Name</th><td>{{orderService.order.lastName}}</td></tr>
+    <tr><th>Address 1</th><td>{{orderService.order.address1}}</td></tr>
+    <tr><th>Address 2</th><td>{{orderService.order.address2}}</td></tr>
+    <tr><th>Zip</th><td>{{orderService.order.zip}}</td></tr>
+    <tr><th>State</th><td>{{orderService.order.state}}</td></tr>
+    <tr><th>Products</th><td>{{orderService.cart.itemCount}}</td></tr>
+    <tr>
+      <th>Sub Total</th>
+      <td>{{orderService.cart.totalPrice | currency:"USD":"symbol" }}</td>
+    </tr>
+    <tr><th>Tax</th><td>-</td></tr>
+    <tr><th>Shipping</th><td>$10.75</td>
+    <tr><th>Total</th><td>{{total | currency:"USD":"symbol" }}</td>
+    </tr>
+  </table>
+</div>
+<div class="text-left pt-2">
+  <button type="button" class="backButtonShipping"
+          routerLink="/checkout/step1">
+    Edit Shipping Info
+  </button>
+<!--<button type="button" class="btn btn-danger m-1" (click)="submitOrder()">
+  Place Order
+</button>-->
+</div>

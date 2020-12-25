@@ -1,0 +1,65 @@
+<div class="navBar">
+  <store-nav></store-nav>
+</div>
+<br />
+
+<div class="m-1">
+    <h2 class="text-left shoppingCart">SHOPPING CART</h2>
+    <table class="table table-borderless p-1 carttable">
+        <thead>
+            <tr>
+                <th class="font-weight-light">Item</th>
+                <th class="font-weight-light"></th>
+                <th class="font-weight-light">Qty</th>
+                <th class="font-weight-light">Price</th>
+                <!--<th class="font-weight-light">Subtotal</th>-->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="cart.selections.length == 0">
+                <td colspan="4" class="text-xs-center">
+                    Your cart is empty
+                </td>
+            </tr>
+            <tr *ngFor="let sel of cart.selections">
+              <td><img class="productImageThumb" [src]="sel.imageUrl"></td>
+              <td class="text-left ml-2">
+                {{sel.name}}
+                <br />
+                <small>{{sel.selectedOptionsArray.join(", ")}}</small>
+              </td>
+              <td>
+                <input type="number" class="form-control-sm carttable"
+                       style="width:3.5em" [(ngModel)]="sel.quantity" (change)='cart.updateTotalPrice()'  />
+              </td>
+              <!--<td class="text-center">
+                {{sel.price | currency:"USD":"symbol":"2.2-2"}}
+              </td>-->
+              <td class="text-center">
+                {{(sel.quantity * sel.price) | currency:"USD":"symbol":"2.2-2" }}
+              </td>
+              <td class="text-left p-1">
+                <a class="btn btn-sm btn-secondary"
+                        (click)="cart.updateQuantity(sel.productId, 0)">
+                  X
+                </a>
+              </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">SubTotal:</td>
+                <td class="">
+                    {{cart.totalPrice | currency:"USD":"symbol":"2.2-2"}}
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<div class="text-center">
+    <button class="btn btn-outline-primary m-1" routerLink="/store">Continue Shopping</button>
+    <button class="btn btn-danger m-1" routerLink="/checkout"
+            [disabled]="cart.selections.length == 0">
+        Checkout
+    </button>
+</div>

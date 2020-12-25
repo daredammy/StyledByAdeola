@@ -1,0 +1,63 @@
+<div class="navBar">
+  <store-nav></store-nav>
+</div>
+<br />
+
+<div *ngIf="product != null; else nodata" class="container">
+  <div class="row justify-content-center">
+
+    <div class="d-none d-lg-block d-md-block col-sm-1 ml-1 pr-0 pl-0">
+      <div *ngFor="let pictureUrl of pictureUrlList" class="">
+        <a (click)="currentImage = pictureUrl">
+          <img class="productImageThumb mb-1" [src]="sanitize(pictureUrl)">
+        </a>
+      </div>
+    </div>
+
+    <div class="col-sm pl-2 pr-0 productImageDetailContainer">
+      <img class="productImageDetail" [src]="sanitize(currentImage)">
+      <div class="d-none d-sm-block d-md-none">
+        <img (click)="previousPicture()" class="previous picControl" src="assets/img/previous.png">
+        <img (click)="nextPicture()" class="next picControl" src="assets/img/next.png">
+      </div>
+    </div>
+
+    <div class="col productDetailsText pl-2 pr-0">
+      <h3 class="mb-4 productDetailsText">{{ product?.title }}</h3>
+      <h4 class="mb-4 float-left">
+        {{ formatUsd(product?.price) }}
+      </h4>
+      <h6 class="mb-lg-4 mb-md-1 mb-sm-3 mb-2 float-left font-weight-normal" [innerHTML]="product?.description"></h6>
+
+      <div *ngFor="let optionName of optionNamesValuePairs | keyvalue">
+        <select [id]="removeSpace(optionName.key)" class="form-control mb-lg-5 mb-md-2 mb-sm-4 mb-2" (change)='onOptionsSelected()'>
+          <option selected>{{optionName.key}}</option>
+          <option *ngFor="let optionValue of optionName.value | orderBy" [ngValue]="optionName.value" class="">
+            {{optionValue}}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-2 mr-0 p-0 mb-lg-5 mb-md-2 mb-sm-4 mb-2">
+        <label class="m-0" for="inlineFormInputName2">Quantity:</label>
+        <input class="form-control" id="" min="1" name="quantity" value="1" type="number" [(ngModel)]="quantity">
+      </div>
+
+      <button class="btn btn-secondary"
+              (click)="addToCart(product)">
+        {{addToCartText}}
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<div id="ListOfAllProducts" class="row">
+  <div class="col-12 mt-4">
+    <store-product-list></store-product-list>
+  </div>
+</div>
+
+<ng-template #nodata>
+  <h4 class="m-2">Waiting for data...</h4>
+</ng-template>

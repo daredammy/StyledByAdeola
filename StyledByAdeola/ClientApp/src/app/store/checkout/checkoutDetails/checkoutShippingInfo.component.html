@@ -1,0 +1,134 @@
+<div class="navBar">
+  <store-nav></store-nav>
+</div>
+<br />
+
+<div class="">
+  <h2 class="text-center mt-2">Enter Shipping Information</h2>
+
+  <form class="checkoutForm" novalidate #detailsForm="ngForm">
+    <div class="form-group">
+      <input #name="ngModel" name="email" placeholder="Email" class="form-control" type="email"
+             [(ngModel)]="orderService.order.email" required />
+    </div>
+
+    <div class="form-group">
+      <input #name="ngModel" name="FirstName" placeholder="First Name" class="form-control" type="text"
+             [(ngModel)]="orderService.order.firstName" required />
+    </div>
+
+    <div class="form-group">
+      <input #name="ngModel" name="LastName" placeholder="Last Name" class="form-control" type="text"
+             [(ngModel)]="orderService.order.lastName" required />
+    </div>
+
+
+    <div class="form-group">
+      <input #address="ngModel" name="Address1" placeholder="Address 1" class="form-control" type="text"
+             [(ngModel)]="orderService.order.address1" required />
+    </div>
+
+    <div class="form-group">
+      <input #address="ngModel" name="Address2" class="form-control" placeholder="Address 2"
+             [(ngModel)]="orderService.order.address2" />
+    </div>
+
+    <div class="form-group">
+      <input #address="ngModel" name="Country" class="form-control" placeholder="Country"
+             [(ngModel)]="orderService.order.country" required />
+    </div>
+
+    <div class="form-group">
+      <input #address="ngModel" name="Zip" class="form-control" placeholder="Zip"
+             [(ngModel)]="orderService.order.zip" required />
+    </div>
+
+    <div class="form-group">
+      <input #address="ngModel" name="City" class="form-control" placeholder="City"
+             [(ngModel)]="orderService.order.city" required />
+    </div>
+
+    <div class="form-group">
+      <input #address="ngModel" name="State" class="form-control" placeholder="State"
+             [(ngModel)]="orderService.order.state" required />
+    </div>
+
+    <div class="form-group">
+      <input #address="ngModel" name="State" class="form-control" placeholder="Phone Number" type="tel"
+             [(ngModel)]="orderService.order.phoneNumber" required />
+    </div>
+
+    <!--<div class="text-center pt-2">
+      <button type="button" class="btn btn-outline-primary m-1"
+              routerLink="/cart">
+        Back To Cart
+      </button>
+      <button type="button" class="btn btn-danger m-1"
+              [disabled]="detailsForm.invalid"
+              routerLink="/checkout/step2">
+        Next
+      </button>
+    </div>-->
+
+  </form>
+</div>
+
+<!--<div class="text-center pt-2" *ngIf="authService.authenticated==false && !showLoginForm">-->
+<div class="row justify-content-center text-center pt-2 checkoutForm" *ngIf="authService.authenticated==false">
+  <div class="col-sm-auto pt-3">
+    <button class="btn btn-outline-dark loginButton"
+            (click)="showLoginForm=true">
+      Login
+    </button>
+  </div>
+
+  <div class="col-sm-auto pt-3">
+    <button (click)="loginGoogle()" class="btn btn-outline-dark loginButton" href="/users/googleauth" role="button" style="text-transform:none">
+      <img class="googleImg" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+      Login with Google
+    </button>
+  </div>
+
+  <!--<div class="col-sm-auto">
+    <button class="btn btn-outline-dark" href="/users/googleauth" role="button" style="text-transform:none">
+      <img class="googleImg" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" />
+      Login with Microsoft
+    </button>
+  </div>-->
+
+  <div class="col-sm-auto pt-3">
+    <button class="btn btn-outline-dark loginButton" routerLink="/checkout/step2"
+            (click)="showShippingForm=true">
+      Continue as Guest
+    </button>
+  </div>
+
+  <div class="col-sm-auto pt-3">
+    <button type="button" class="btn btn-outline-dark loginButton"
+            routerLink="/cart">
+      Back To Cart
+    </button>
+  </div>
+</div>
+
+<div class="row justify-content-center text-center pt-2 checkoutForm" *ngIf="authService.authenticated==true">
+  <div class="col-sm-auto pt-3">
+    <button class="btn btn-outline-dark loginButton" routerLink="/checkout/step2"
+            (click)="showShippingForm=true">
+      Continue
+    </button>
+  </div>
+
+  <div class="col-sm-auto pt-3">
+    <button type="button" class="btn btn-outline-dark loginButton"
+            routerLink="/cart">
+      Back To Cart
+    </button>
+  </div>
+</div>
+
+<div *ngIf="showLoginForm_" class="pt-2">
+  <authenticate></authenticate>
+</div>
+
+

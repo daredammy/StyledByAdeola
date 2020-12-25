@@ -1,0 +1,366 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #e01a76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* You can add global styles to this file, and also import other style files */
+.navcompanyicon {
+  max-width: 50%;
+  height: auto;
+}
+
+.navbar {
+  background-color: black;
+  min-height: 225px;
+  position: relative
+}
+
+.navbar-toggler-icon {
+  background-color: grey;
+}
+
+.brand {
+  position: absolute;
+  left: 50%;
+  margin-left: -50px !important; /* 50% of your logo width */
+  display: block;
+}
+
+.cart {
+  position: absolute;
+  left: 90%;
+  margin-left: -50px !important; /* 50% of your logo width */
+  display: block;
+}
+
+.background_ {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (min-width: 800px) {
+  .background_ {
+    content: url("assets/img/StyledByAdeolaBackGround_Large.jpg");
+  }
+
+  .backgroundText {
+    top: 70%;
+    left: 35%;
+  }
+}
+
+@media only screen and (max-width: 799px) and (min-width: 651px) {
+  .background_ {
+    content: url("assets/img/StyledByAdeolaBackGround_Medium.jpg");
+  }
+
+  .backgroundText {
+    top: 50%;
+    left: 35%;
+  }
+}
+
+/* responsive, form small screens, use 13px font size */
+@media (max-width: 650px) {
+  .background_ {
+    content: url("assets/img/StyledByAdeolaBackGround_Small.jpg");
+  }
+
+  .backgroundText {
+    top: 60%;
+    left: 40%;
+  }
+}
+
+.backgroudContainer {
+  position: relative;
+  text-align: center;
+}
+
+.backgroundText {
+  position: absolute;
+  color: #fff;
+  font-family: Arial;
+  font-weight: 500;
+  font-size: 2em;
+  transform: translate(-50%, -50%);
+  text-align: left;
+}
+
+.active {
+  content: "";
+  flex: 1 1 auto;
+  border-bottom: 1px solid #000;
+}
+
+.navactive {
+  border-bottom: 1px solid white;
+}
+
+.categoryFilter {
+  color: rgb(72,72,72);
+  font-size: 18px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+}
+
+  .categoryFilter::-webkit-scrollbar {
+    display: none;
+  }
+
+.categoryFilterDelimter {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.category {
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+  .category::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 1px;
+    background: #000;
+    transition: width .3s;
+  }
+
+  .category:hover::after {
+    width: 100%;
+    color: rgb(72,72,72);
+  }
+
+  .category:hover {
+    color: rgb(72,72,72);
+  }
+
+#imgInput {
+  display: block;
+  margin-bottom: 15px;
+}
+
+#img {
+  width: 40%;
+  height: auto;
+}
+
+.productImage {
+  width: 320px;
+  object-fit: contain;
+}
+
+.productImageDetail {
+  width: 95%;
+  min-width: 300px;
+  object-fit: contain;
+}
+
+.productImageThumb {
+  width: 60px;
+  object-fit: contain;
+}
+
+.productTitle {
+  width: 320px;
+}
+
+.productDetailsText {
+  max-width: 50%;
+  min-width: 320px;
+}
+
+.productImageDetailContainer {
+  display: inline-block;
+  position: relative;
+}
+
+.picControl:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.picControl {
+  position: absolute;
+  border-radius: 0.5em;
+  color: white;
+  text-transform: uppercase;
+  padding: 0.3em 0.5em;
+  bottom: 1em;
+}
+
+.previous {
+  right: 4.5em;
+  color: black;
+}
+
+.next {
+  right: 2em;
+  color: white;
+}
+
+@media (max-width: 1001px) and (min-width: 764px) {
+  .picControl {
+    position: absolute;
+    border-radius: 0.5em;
+    color: white;
+    text-transform: uppercase;
+    padding: 0.3em 0.5em;
+    bottom: 3em;
+  }
+
+  .previous {
+    right: 5.5em;
+    color: black;
+  }
+
+  .next {
+    right: 3em;
+    color: white;
+  }
+}
+
+@media (max-width: 1251px) and (min-width: 1001px) {
+  .picControl {
+    position: absolute;
+    border-radius: 0.5em;
+    color: white;
+    text-transform: uppercase;
+    padding: 0.3em 0.5em;
+    bottom: 5em;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+  a:hover, .cartSummary:hover {
+    color: #686868;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+.stackImg {
+  position: relative;
+  display: inline-block;
+}
+
+  .stackImg .img-top {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+  }
+
+  .stackImg:hover .img-top {
+    display: inline;
+  }
+
+.table {
+  padding: 1em;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+  .table th, .table td {
+    padding: 0.3rem;
+    vertical-align: top;
+    text-align: left;
+    /* border-top: 1px solid #dee2e6; */
+  }
+
+.shoppingCart {
+  width: 40%;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.5em;
+  padding-left: 0px;
+}
+
+.carttable {
+  max-width: 50%;
+  padding: 0;
+}
+
+@media (max-width: 600px) {
+  .carttable {
+    font-size: 3vw;
+    padding: 0;
+  }
+}
+
+@media (min-width: 600px) and (min-width: 1200px) {
+  .carttable {
+    font-size: 1.7vw;
+    padding: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .carttable {
+    font-size: 1vw;
+  }
+}
+
+
+.checkoutForm {
+  max-width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*.loginform {
+  max-width: 38%;
+  margin-left: auto;
+  margin-right: auto;
+}*/
+
+.googleImg {
+  width: 20px;
+  margin-bottom: 3px;
+  margin-right: 5px;
+}
+
+.loginButton {
+  width: 190px !important;
+}
+
+.backButtonShipping {
+  background-color: #009CDE;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 20px;
+  max-width: 50%;
+  margin-left: 25%;
+  margin-right: auto;
+}
+
