@@ -1,2 +1,2 @@
 # StyledByAdeola
-Webinterface for selling custome made wigs
+Web interface for selling custome made wigs
