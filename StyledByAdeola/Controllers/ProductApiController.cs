@@ -11,21 +11,23 @@ using Microsoft.AspNetCore.Authorization;
 using StyledByAdeola.Models;
 using StyledByAdeola.ServiceContracts;
 using StyledByAdeola.Services;
+using Microsoft.Extensions.Logging;
 
 namespace StyledByAdeola.Controllers
 {
     [Route("api/products")]
     [ApiController]
     [AutoValidateAntiforgeryToken]
-    //[Authorize(Roles = "Administrator")]
     public class ProductApiController : Controller
     {
         private IProductRepository<ProductDocDb> repository;
         private  IBlobStorage blobStorage;
-        public ProductApiController(IProductRepository<ProductDocDb> repo, IBlobStorage blobStorage)
+        private readonly ILogger<ProductApiController> logger;
+        public ProductApiController(IProductRepository<ProductDocDb> repo, IBlobStorage blobStorage, ILogger<ProductApiController> logger)
         {
-            repository = repo;
+            this.repository = repo;
             this.blobStorage = blobStorage;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -33,6 +35,7 @@ namespace StyledByAdeola.Controllers
         public async Task<IActionResult> GetProducts(string category, string search,
                 bool related = false, bool metadata = false)
         {
+
             IQueryable<ProductDocDb> products = await repository.MainProducts().ConfigureAwait(false);
 
             try
@@ -41,6 +44,9 @@ namespace StyledByAdeola.Controllers
             }
             catch (FormatException)
             {
+                logger.LogError("The product tag at [0] is not a valid integer");
+                logger.LogError("The product tag at [0] is not a valid integer");
+                logger.LogError("The product tag at [0] is not a valid integer");
             }
 
             if (!string.IsNullOrWhiteSpace(category))

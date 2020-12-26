@@ -16,7 +16,7 @@ export class NavigationService {
             .subscribe(ev => this.handleNavigationChange());
     }
 
-    private handleNavigationChange() {
+  private handleNavigationChange() {
       let active = this.active.firstChild.snapshot;
       if (active.url.length > 0 && active.url[0].path === "store" && active.url[1].path === "p")
       {
@@ -37,7 +37,10 @@ export class NavigationService {
           {
             this.repository.filter.category
               = active.params["categoryOrPage"];
+            //this.productService.filter.category =
+            //  active.params["categoryOrPage"];
             this.repository.paginationObject.currentPage = 1;
+            //this.productService.getProducts();
           }
         }
         else
@@ -49,7 +52,7 @@ export class NavigationService {
             = Number.parseInt(active.params["page"]) || 1
         }
         this.repository.paginationObject.productsPerPage = 12;
-        //this.repository.getProducts();
+        this.repository.getProducts();
       }
     }
 

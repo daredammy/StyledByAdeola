@@ -1,0 +1,5 @@
+{
+    "appService.preDeployTask": "publish-release",
+    "appService.deploySubpath": "bin\\Release\\netcoreapp3.1\\publish",
+    "appService.defaultWebAppToDeploy": "/subscriptions/434d3739-65c1-48c9-b239-a8f58801785c/resourceGroups/StyledByAdeola-rg/providers/Microsoft.Web/sites/StyledByAdeola"
+}

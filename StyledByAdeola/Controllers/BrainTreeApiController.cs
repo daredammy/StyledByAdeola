@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-namespace StyledByAdeola.ApiControllers
+namespace StyledByAdeola.Controllers
 {
     [Route("api/braintree")]
     [ApiController]

@@ -43,7 +43,7 @@ export class Repository {
       url += `&search=${this.filter.search}`;
     }
     url += "&metadata=true";
-
+    console.log("calling Db");
     return this.http.get<productsMetadata>(url)
       .toPromise<productsMetadata>()
       .then(md => {
