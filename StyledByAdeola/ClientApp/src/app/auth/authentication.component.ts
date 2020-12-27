@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 
 @Component({
   templateUrl: "authentication.component.html",
-  selector: "authenticate"
+  selector: "store-login"
 })
 export class AuthenticationComponent {
 

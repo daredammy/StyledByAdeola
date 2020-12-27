@@ -24,28 +24,57 @@ namespace StyledByAdeola.Controllers {
         //private IPasswordValidator<AppUser> passwordValidator;
         //private IPasswordHasher<AppUser> passwordHasher;
         private SignInManager<AppUser> signInManager;
-        // This telemtryclient can be used to track additional telemetry using TrackXXX() api.
-        //private TelemetryClient telemetryClient;
 
         public AccountApiController(UserManager<AppUser> userMgr,
                 SignInManager<AppUser> signInMgr)
         {
             userManager = userMgr;
             signInManager = signInMgr;
-            //telemetryClient = telemetry;
         }
 
         [HttpPost("/api/account/login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginModel creds) {
-            AppUser user = await userManager.FindByNameAsync(creds.Name);
-            if (user != null)
+            if (ModelState.IsValid)
             {
-                await signInManager.SignOutAsync();
-                if ((await signInManager.PasswordSignInAsync(user,
-                        creds.Password, false, false)).Succeeded)
+                AppUser user = await userManager.FindByEmailAsync(creds.Name);
+                if (user != null)
                 {
-                    return Ok("true");
+                    await signInManager.SignOutAsync();
+                    if ((await signInManager.PasswordSignInAsync(user,
+                            creds.Password, false, false)).Succeeded)
+                    {
+                        return Ok("true");
+                    }
+                }
+                return BadRequest("Invalid credentials");
+            }
+            return BadRequest();
+        }        
+        
+        [HttpPost("/api/account/signup")]
+        [AllowAnonymous]
+        [IgnoreAntiforgeryToken]
+        public async Task<IActionResult> SignUp([FromBody] LoginModel creds) {
+            if (ModelState.IsValid)
+            {
+                AppUser user = await userManager.FindByNameAsync(creds.Email);
+                if (user == null)
+                {
+                    user = new AppUser
+                    {
+                        Email = creds.Email,
+                        UserName = creds.Email
+                    };
+                    IdentityResult identResult = await userManager.CreateAsync(user);
+                    if (identResult.Succeeded)
+                    {
+                        return Ok("true");
+                    }
+                }
+                else
+                {
+                    return Ok("User exists in db");
                 }
             }
             return BadRequest();
@@ -68,17 +97,20 @@ namespace StyledByAdeola.Controllers {
         //[ValidateAntiForgeryToken]
         public IActionResult ExternalIdentityLogin([FromBody] LoginModel loginModel)
         {
-            if (loginModel.IdentityProvider == "Microsoft" || loginModel.IdentityProvider == "Google")
-            {
-                string redirectUrl = Url.Action("ExternalIdentityProviderResponse", "Account", new { loginModel.ReturnUrl });
-                var properties = signInManager.ConfigureExternalAuthenticationProperties(loginModel.IdentityProvider, redirectUrl);
-                return new ChallengeResult(loginModel.IdentityProvider, properties);
+            if (ModelState.IsValid) { 
+                if (loginModel.IdentityProvider == "Microsoft" || loginModel.IdentityProvider == "Google")
+                {
+                    string redirectUrl = Url.Action("ExternalIdentityProviderResponse", "Account", new { loginModel.ReturnUrl });
+                    var properties = signInManager.ConfigureExternalAuthenticationProperties(loginModel.IdentityProvider, redirectUrl);
+                    return new ChallengeResult(loginModel.IdentityProvider, properties);
+                }
+                else
+                {
+                    throw new System.InvalidOperationException("External Identity Provider is not configured");
+                }
             }
-            else
-            {
-                throw new System.InvalidOperationException("External Identity Provider is not configured");
-            }
-        }
+            return BadRequest();
+    }
 
         /// <summary>
         /// Get response from idauth external identity provider, 

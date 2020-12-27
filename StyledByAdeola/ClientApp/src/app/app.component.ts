@@ -6,15 +6,10 @@ import { Router } from '@angular/router';
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'insights';
-  private appInsights;
 
   constructor(private router: Router) {
-    this.appInsights = new ApplicationInsightsService(router);
-  }
-
-  ngOnInit() {
-    //this.appInsights.loadAppInsights();
+     new ApplicationInsightsService(router);
   }
 }

@@ -35,7 +35,6 @@ namespace StyledByAdeola.Controllers
         public async Task<IActionResult> GetProducts(string category, string search,
                 bool related = false, bool metadata = false)
         {
-
             IQueryable<ProductDocDb> products = await repository.MainProducts().ConfigureAwait(false);
 
             try
@@ -44,8 +43,6 @@ namespace StyledByAdeola.Controllers
             }
             catch (FormatException)
             {
-                logger.LogError("The product tag at [0] is not a valid integer");
-                logger.LogError("The product tag at [0] is not a valid integer");
                 logger.LogError("The product tag at [0] is not a valid integer");
             }
 

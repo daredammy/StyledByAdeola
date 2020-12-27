@@ -123,7 +123,8 @@ namespace StyledByAdeola
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IAntiforgery antiforgery)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IAntiforgery antiforgery, 
+            UserManager<AppUser> userManager, RoleManager<IdentityRole> RoleManager)
         {
             if (env.IsDevelopment())
             {
@@ -207,6 +208,15 @@ namespace StyledByAdeola
                     }
                 }
             });
+
+            if ((Configuration["INITDB"] ?? "false") == "true")
+            {
+                string email = Configuration.GetValue<string>("Email");
+                string adminPassword = Configuration.GetValue<string>("AdminPassword");
+                System.Console.WriteLine("Preparing Database...");
+                IdentitySeedData.EnsurePopulated(userManager, RoleManager, email, adminPassword).GetAwaiter().GetResult();
+                System.Console.WriteLine("Database Preparation Complete");
+            }
         }
 
         /// Creates a Cosmos DB database and a container with the specified partition key. 

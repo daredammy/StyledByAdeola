@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProductSelectionComponent } from "./store/productSelection/productSelection.component";
+import { FAQsComponent } from "./store/faqs/faqs.component";
+import { AboutComponent } from "./store/about/about.component";
 import { ProductDetailsComponent } from "./store/productDetails/productDetails.component";
 import { CartDetailComponent } from "./store/cartDetails/cartDetail.component";
 import { CheckoutShippingInfo } from "./store/checkout/checkoutDetails/checkoutShippingInfo.component";
@@ -23,6 +25,8 @@ const routes: Routes = [
   { path: "store/p/:product", component: ProductDetailsComponent },
   { path: "store/:category/:page", component: ProductSelectionComponent },
   { path: "store/:categoryOrPage", component: ProductSelectionComponent },
+  { path: "faqs", component: FAQsComponent },
+  { path: "about", component: AboutComponent },
   { path: "store", redirectTo: "store/", pathMatch: "full" },
   { path: "", redirectTo: "store/", pathMatch: "full" },
 

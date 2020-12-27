@@ -4,11 +4,24 @@
   </button>
 
   <a class="brand nav-item">
-    <img class="navcompanyicon" src="assets/img/styledByAdeolaLogo.png">
+    <img class="navcompanyicon" src="/assets/img/styledByAdeolaLogo.png">
   </a>
 
-  <div class="cart">
+  <div class="text-right p-1 cart cartSummary">
     <store-cartsummary></store-cartsummary>
+  </div>
+
+  <div class="instagramNav d-none d-lg-block">
+    <a href="https://www.instagram.com/styledbyadeola/" target="_blank"><img src="/assets/img/instagram-16.png" class="mr-3" /></a>
+  </div>
+
+  <span class="loginNav text-white mr-1">
+    <a *ngIf="!authService.authenticated  else elseBlock" data-toggle="modal" data-target="#loginModal">Login</a>
+    <ng-template #elseBlock><a (click)="logout()">Logout</a></ng-template>
+  </span>
+
+  <div class="mailNav d-none d-lg-block">
+    <a href="mailto:styledbyadeola@gmail.com" target="_blank"><img src="/assets/img/mail-16.png" aria-label="styledbyadeola@gmail.com" /></a>
   </div>
 
   <div class="collapse navbar-collapse" id="navbarToggler">
@@ -20,11 +33,44 @@
         <a class="nav-link text-white" href="#">Lookbook</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white" href="#">About</a>
+        <a class="nav-link text-white" routerLink='/about'>About</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled text-white" href="#">FAQs</a>
+        <a class="nav-link text-white" routerLink='/faqs'>FAQs</a>
       </li>
     </ul>
   </div>
 </nav>
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Welcome to StyledByAdeola</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <input placeholder="Email" class="form-control mb-3" id="email" name="email" [(ngModel)]="email">
+            <input placeholder="Password" type="password" class="form-control" id="password" name="password"  [(ngModel)]="password"/>
+          </div>
+          <span *ngIf="showError" class="text-danger small">Invalid credentials</span>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="closeModalButton" [hidden]="true" data-toggle="modal"
+                data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-dark btn-block" (click)="login()">Sign In</button>
+      </div>
+      <div class="text-center mb-2 small">
+        <a class="mr-2">Forgot Password?</a>
+        <a class="">Create account</a>
+      </div>
+    </div>
+  </div>
+</div>

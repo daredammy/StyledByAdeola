@@ -6,6 +6,10 @@ namespace StyledByAdeola.Models.ViewModels
     {
         public string Name { get; set; }
 
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
+        public string Email { get; set; }
+
         [UIHint("password")]
         public string Password { get; set; }
 

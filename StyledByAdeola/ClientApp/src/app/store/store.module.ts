@@ -5,6 +5,9 @@ import { CartSummaryComponent } from "./cartSummary/cartSummary.component";
 import { CategoryFilterComponent } from "./categoryFilter/categoryFilter.component";
 import { PaginationComponent } from "./pagination/pagination.component";
 import { RatingsComponent } from "./ratings/ratings.component";
+import { FAQsComponent } from "./faqs/faqs.component";
+import { AboutComponent } from "./about/about.component";
+import { FooterComponent } from "./footer/footer.component";
 import { ProductDetailsComponent } from "./productDetails/productDetails.component";
 import { ProductListComponent } from "./productList/productList.component";
 import { ProductSelectionComponent } from "./productSelection/productSelection.component";
@@ -24,13 +27,13 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
-    declarations: [CartSummaryComponent, CategoryFilterComponent,
-        PaginationComponent, RatingsComponent, ProductListComponent,
+  declarations: [CartSummaryComponent, CategoryFilterComponent, AboutComponent, FooterComponent,
+        PaginationComponent, RatingsComponent, ProductListComponent, FAQsComponent,
         ProductSelectionComponent, CartDetailComponent, CheckoutShippingInfo,
         CheckoutPaymentComponent, CheckoutSummaryComponent, AuthenticationComponent,
         OrderConfirmationComponent, ProductDetailsComponent, NavBarComponent],
   imports: [BrowserModule, FormsModule, RouterModule, CommonModule, NgPipesModule, NgxBraintreeModule, HttpClientModule],
-  exports: [ProductDetailsComponent, ProductSelectionComponent, CartDetailComponent, NavBarComponent, CheckoutShippingInfo, CheckoutSummaryComponent, AuthenticationComponent],
+  exports: [ProductDetailsComponent, FooterComponent, ProductSelectionComponent, CartDetailComponent, NavBarComponent, CheckoutShippingInfo, CheckoutSummaryComponent, AuthenticationComponent],
     schemas: [NO_ERRORS_SCHEMA],
 })
 export class StoreModule { }

@@ -3,15 +3,18 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { map, catchError } from 'rxjs/operators';
 import { Observable, of } from "rxjs";
+import { HttpHeaders } from '@angular/common/http';
 
 
-@Injectable()
-export class AuthenticationManagerService {;    
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthenticationManagerService {
 
   constructor(private http: HttpClient,
               private router: Router) {}
 
-  authenticated: boolean = false;
+  authenticated: boolean = JSON.parse(sessionStorage.getItem('authenticated'));
   email: string;
   password: string;
   callbackUrl: string;
@@ -26,8 +29,9 @@ export class AuthenticationManagerService {;
                                     this.authenticated = true;
                                     this.password = null;
                                     this.router.navigateByUrl(this.callbackUrl);
-                                  }
-                                  return this.authenticated;
+                                    sessionStorage.setItem('authenticated', 'true');
+                                }
+                                return this.authenticated;
                                 }
                               ),
                                 catchError(e => {
@@ -38,7 +42,6 @@ export class AuthenticationManagerService {;
   }
 
   loginGoogle(): Observable<boolean> {
-        console.log("here")
         this.authenticated = false;
         return this.http.post<boolean>("/api/account/externalidentitylogin", { name: this.email, password: this.password, identityProvider: this.identityProvider})
                         .pipe(
@@ -48,6 +51,7 @@ export class AuthenticationManagerService {;
                                     this.password = null;
                                     console.log(this.callbackUrl);
                                     this.router.navigateByUrl(this.callbackUrl);
+                                    sessionStorage.setItem('authenticated', 'true');
                                   }
                                   return this.authenticated;
                                 }
@@ -62,7 +66,20 @@ export class AuthenticationManagerService {;
 
   logout() {
       this.authenticated = false;
+      localStorage.removeItem('currentUser');
       this.http.post("/api/account/logout", null).subscribe(response => { });
-      this.router.navigateByUrl("/admin/login");
+      sessionStorage.removeItem('authenticated');
+      //this.router.navigateByUrl("/admin/login");
+  }
+
+
+
+  signUp(emailAddress: string) {
+    //const httpOptions = {
+    //  headers: new HttpHeaders({
+    //    'Content-Type': 'text/plain',
+    //  })
+    //};
+    this.http.post("/api/account/signup", { emailAddress }).subscribe(response => { });
     }
 }

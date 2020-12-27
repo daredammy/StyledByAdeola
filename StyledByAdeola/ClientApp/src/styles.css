@@ -40,7 +40,29 @@ code {
 
 .cart {
   position: absolute;
-  left: 90%;
+  left: 95%;
+  margin-left: -50px !important; /* 50% of your logo width */
+  display: block;
+}
+
+.loginNav {
+  position: absolute;
+  left: 82%;
+  margin-left: -50px !important; /* 50% of your logo width */
+  display: block;
+  font-weight:500;
+}
+
+.instagramNav {
+  position: absolute;
+  left: 88%;
+  margin-left: -50px !important; /* 50% of your logo width */
+  display: block;
+}
+
+.mailNav {
+  position: absolute;
+  left: 91%;
   margin-left: -50px !important; /* 50% of your logo width */
   display: block;
 }
@@ -362,5 +384,9 @@ a {
   max-width: 50%;
   margin-left: 25%;
   margin-right: auto;
+}
+
+.aboutPageText{
+    min-width: 300px
 }
 
